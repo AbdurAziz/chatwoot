@@ -1,10 +1,10 @@
-class Integrations::Captain::ProcessorService < Integrations::BotProcessorService
+class Integrations::ai_agent::ProcessorService < Integrations::BotProcessorService
   pattr_initialize [:event_name!, :hook!, :event_data!]
 
   private
 
   def get_response(_session_id, message_content)
-    call_captain(message_content)
+    call_ai_agent(message_content)
   end
 
   def process_response(message, response)
@@ -30,8 +30,8 @@ class Integrations::Captain::ProcessorService < Integrations::BotProcessorServic
     )
   end
 
-  def call_captain(message_content)
-    url = "#{GlobalConfigService.load('CAPTAIN_API_URL',
+  def call_ai_agent(message_content)
+    url = "#{GlobalConfigService.load('AIAGENT_API_URL',
                                       '')}/accounts/#{hook.settings['account_id']}/assistants/#{hook.settings['assistant_id']}/chat"
 
     headers = {
